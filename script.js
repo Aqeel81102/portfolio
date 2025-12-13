@@ -4,6 +4,11 @@ const sidebar = document.querySelector('.sidebar');
 const navLinks = document.querySelectorAll('.nav-links li a');
 const bars = document.querySelectorAll('.bar');
 
+// Helper to lock/unlock body scroll
+const toggleBodyScroll = (lock) => {
+    document.body.style.overflow = lock ? 'hidden' : '';
+};
+
 function toggleMenu() {
     sidebar.classList.toggle('active');
     
@@ -11,12 +16,12 @@ function toggleMenu() {
     if (sidebar.classList.contains('active')) {
         bars[0].style.transform = "rotate(45deg) translate(5px, 5px)";
         bars[1].style.transform = "rotate(-45deg) translate(5px, -5px)";
-        // Prevent background scrolling when menu is open on mobile
-        if (window.innerWidth <= 991) document.body.style.overflow = 'hidden';
+        // Lock body on mobile when menu is open
+        if (window.innerWidth <= 991) toggleBodyScroll(true);
     } else {
         bars[0].style.transform = "none";
         bars[1].style.transform = "none";
-        document.body.style.overflow = '';
+        toggleBodyScroll(false);
     }
 }
 
@@ -29,12 +34,12 @@ navLinks.forEach(link => {
             sidebar.classList.remove('active');
             bars[0].style.transform = "none";
             bars[1].style.transform = "none";
-            document.body.style.overflow = '';
+            toggleBodyScroll(false);
         }
     });
 });
 
-/* --- SCROLL SPY (Optimized for Mobile Performance) --- */
+/* --- SCROLL SPY (Optimized) --- */
 const sections = document.querySelectorAll('section');
 let isScrolling = false;
 
@@ -62,49 +67,12 @@ window.addEventListener('scroll', () => {
     }
 });
 
-/* --- TYPING EFFECT --- */
-const typingElement = document.querySelector('.typing-text');
-const roles = ["IT Student.", "Android Developer.", "Problem Solver."];
-let roleIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-
-function type() {
-    const currentRole = roles[roleIndex];
-    if (isDeleting) {
-        typingElement.textContent = currentRole.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typingElement.textContent = currentRole.substring(0, charIndex + 1);
-        charIndex++;
-    }
-
-    if (!isDeleting && charIndex === currentRole.length) {
-        isDeleting = true;
-        setTimeout(type, 2000);
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        setTimeout(type, 500);
-    } else {
-        setTimeout(type, isDeleting ? 50 : 100);
-    }
-}
-document.addEventListener('DOMContentLoaded', type);
-
-
 /* --- PROJECT DATA & MODAL LOGIC --- */
-
-// Helper to lock/unlock body scroll
-const toggleBodyScroll = (lock) => {
-    document.body.style.overflow = lock ? 'hidden' : '';
-};
-
 const projects = {
     elderhero: {
         title: "ElderHero",
         category: "Android Mobile App & Web Admin",
-        description: "ElderHero is a comprehensive mobile application designed to connect families with personalized caretakers for the elderly. It includes two distinct Android apps (one for families, one for caretakers) and a centralized Web Admin Dashboard for monitoring.",
+        description: "ElderHero is a comprehensive mobile application designed to connect families with personalized caretakers for the elderly. It includes two distinct Android apps (one for families, one for caretakers) and a centralized Web Admin Dashboard for monitoring. Key features include real-time chat (text/voice/image), specialized filtering for caretaker expertise, and secure user authentication via Firebase.",
         images: [
             "images/login.jpeg",
             "images/image.png",       
@@ -117,7 +85,7 @@ const projects = {
     toolshare: {
         title: "UiTM Tool Share",
         category: "Android Mobile App",
-        description: "UiTM Tool Share is a collaborative platform facilitating tool rental and swapping among university students and staff. The app ensures trust and transparency through a unique QR code status update system.",
+        description: "UiTM Tool Share is a collaborative platform facilitating tool rental and swapping among university students and staff. The app ensures trust and transparency through a unique QR code status update system. Features include item management, image uploads, category filtering, and real-time data synchronization.",
         images: [
             "images/toolshare1.jpeg",
             "images/toolshare2.jpeg",
@@ -176,7 +144,6 @@ document.querySelectorAll('.read-more').forEach(btn => {
                 img.onclick = function() {
                     lightbox.style.display = "flex";
                     lightboxImg.src = this.src;
-                    // Note: Body is already locked by modal, so we don't need to lock again
                 }
                 
                 modalGallery.appendChild(img);
@@ -202,7 +169,6 @@ window.addEventListener('click', (e) => {
 // Close Lightbox
 const hideLightbox = () => {
     lightbox.style.display = "none";
-    // We do NOT unlock scroll here because the underlying modal is still open
 };
 
 closeLightbox.addEventListener('click', hideLightbox);
