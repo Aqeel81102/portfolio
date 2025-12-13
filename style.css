@@ -97,6 +97,7 @@ ul { list-style: none; }
 .project-card { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: 0.3s ease; }
 .project-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
 
+/* Main Card Image (Thumbnail) */
 .card-image {
     width: 100%;
     height: 180px;
@@ -146,7 +147,7 @@ ul { list-style: none; }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 2% auto;
+    margin: 5% auto; /* Increased margin for top on mobile */
     padding: 2.5rem;
     border: 1px solid #888;
     border-radius: 12px;
@@ -217,7 +218,7 @@ ul { list-style: none; }
 .lightbox-content {
     margin: auto;
     display: block;
-    width: 80%;
+    width: 90%;
     max-width: 1000px;
     max-height: 90vh; /* Prevents overflow vertical */
     object-fit: contain;
@@ -251,15 +252,50 @@ ul { list-style: none; }
 /* --- Mobile --- */
 @media (max-width: 991px) {
     body { flex-direction: column; }
-    .sidebar { width: 100%; height: 70px; flex-direction: row; align-items: center; padding: 0 5%; border-right: none; border-bottom: 1px solid var(--border-color); background: rgba(255,255,255,0.98); }
-    .navbar, .sidebar-footer { position: absolute; top: 70px; left: 0; width: 100%; background: #fff; display: none; padding: 2rem; border-bottom: 1px solid var(--border-color); text-align: center; }
+    
+    .sidebar { 
+        width: 100%; 
+        height: 70px; 
+        flex-direction: row; 
+        align-items: center; 
+        padding: 0 5%; 
+        border-right: none; 
+        border-bottom: 1px solid var(--border-color); 
+        background: rgba(255,255,255,0.98); 
+    }
+    
+    .navbar, .sidebar-footer { 
+        position: absolute; 
+        top: 70px; 
+        left: 0; 
+        width: 100%; 
+        background: #fff; 
+        display: none; 
+        padding: 2rem; 
+        border-bottom: 1px solid var(--border-color); 
+        text-align: center; 
+    }
+    
     .navbar { margin-top: 0; }
+    
     .sidebar.active .navbar { display: block; }
-    .main-content { margin-left: 0; width: 100%; padding-top: 70px; padding-left: 0; }
+    
+    /* Reset main content for mobile to remove desktop gutter */
+    .main-content { 
+        margin-left: 0; 
+        width: 100%; 
+        padding-top: 70px; 
+        padding-left: 0; 
+    }
+    
     .hamburger { display: block; cursor: pointer; }
     .bar { width: 24px; height: 2px; background-color: var(--text-main); margin: 5px 0; transition: 0.3s; }
     .hero-content { max-width: 100%; text-align: center; margin: 0; }
     .hero-content h1 { font-size: 3rem; }
     .description { margin: 0 auto 2rem; }
     .contact-links-container { grid-template-columns: 1fr; }
+    
+    /* Mobile Modal Fixes */
+    .modal-content { width: 95%; margin: 10% auto; padding: 1.5rem; }
+    .modal-gallery { grid-template-columns: 1fr; }
 }
