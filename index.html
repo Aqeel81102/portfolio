@@ -6,6 +6,9 @@
     <title>Portfolio | Mohammad Aqeel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
     <link rel="stylesheet" href="css/laptop.css" media="(min-width: 992px)">
     <link rel="stylesheet" href="css/mobile.css" media="(max-width: 991px)">
 </head>
@@ -71,7 +74,6 @@
                     </p>
                     
                     <div class="skills-grid">
-                        
                         <div class="skill-category">
                             <h4><i class="fas fa-code"></i> Languages</h4>
                             <div class="tag-container">
@@ -103,7 +105,6 @@
                                 <span class="tag">Troubleshooting</span>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -211,25 +212,34 @@
 
     </main>
 
-    <div id="project-modal" class="modal">
+    <div id="project-modal" class="project-modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            
+            <div class="mobile-modal-header">
+                <h3>Project Details</h3>
+                <button class="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <span class="desktop-close-btn">&times;</span>
+
             <div class="modal-body-scroll">
                 <h2 id="modal-title">Project Title</h2>
                 <p id="modal-category" class="category">Category</p>
-                <p id="modal-desc">Project description goes here.</p>
-                <div class="modal-gallery" id="modal-gallery"></div>
+                <p id="modal-desc">Description...</p>
+                
+                <div class="modal-gallery" id="modal-gallery">
+                    </div>
             </div>
         </div>
     </div>
 
     <div id="lightbox" class="lightbox">
         <span class="close-lightbox">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Zoomed Image">
     </div>
 
-    <script src="js/projects.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/mobile-modal.js"></script>
 </body>
 </html>
